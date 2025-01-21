@@ -1,63 +1,73 @@
 ﻿// See https://aka.ms/new-console-template for more information 
 
-//Welcome Message
-Console.WriteLine("Welcome to the sample calculator!");
-//Show calculator options
-Console.WriteLine("---------- Operations ----------");
-Console.WriteLine("1. Addition");
-Console.WriteLine("2. Subtraction");
-Console.WriteLine("3. Mulitpliacion");
-Console.WriteLine("4. Division");
-Console.WriteLine("5. Fibonacci sequence");
-Console.WriteLine("6. Exit program");
-Console.WriteLine();
-Console.Write("Please choose an operation: ");
-int selectedOperation = Convert.ToInt32(Console.ReadLine());
+//Variable Declarations
+int choice = 0;
+int num1,num2 = 0;
 
-while (selectedOperation != 6)
+//Show calculator options / Show menu
+while (choice != 6)
 {
-    //Prompt for user input
-    Console.Write("Please enter the first number: ");
-    int num1 = Convert.ToInt32(Console.ReadLine());
-
-    Console.Write("Please enter the second number: ");
-    int num2 = Convert.ToInt32(Console.ReadLine());
-
-    //Decide which operations is needed based on the selected option
-    int result = 0;
-
-    switch (selectedOperation)
+    try
     {
-        case 1: result = num1 + num2; break;
-        case 2: result = num1 - num2; break;
-        case 3: result = num1 * num2; break;
-        case 4: result = num1 / num2; break;
-        case 5:
-            for (int i = num1; i <= num2; i++)
-            {
-                result += i;
-            }
-            break;
-        default:
-            Console.WriteLine("Invalid choice");
-            break;
-    }
+        //Welcome Message
+        Console.Clear();
+        Console.WriteLine("Welcome to the sample calculator!");
+        Console.WriteLine("---------- Operations ----------");
+        Console.WriteLine("1. Addition");
+        Console.WriteLine("2. Subtraction");
+        Console.WriteLine("3. Mulitpliacion");
+        Console.WriteLine("4. Division");
+        Console.WriteLine("5. Fibonacci sequence");
+        Console.WriteLine("6. Exit program");
+        Console.Write("Please choose an operation: ");
+        choice = Convert.ToInt32(Console.ReadLine());
 
-    //Print output
-    Console.WriteLine($"Your result is: {result}");
-    Console.WriteLine("Press Enter to continue");
-    Console.ReadLine();
-    Console.Clear();
-    Console.WriteLine("---------- Operations ----------");
-    Console.WriteLine("1. Addition");
-    Console.WriteLine("2. Subtraction");
-    Console.WriteLine("3. Mulitpliacion");
-    Console.WriteLine("4. Division");
-    Console.WriteLine("5. Fibonacci sequence");
-    Console.WriteLine("6. Exit program");
-    Console.WriteLine();
-    Console.Write("Please choose an operation: ");
-    selectedOperation = Convert.ToInt32(Console.ReadLine());
+        if (choice == 6)
+        {
+            break;
+        }
+        
+        Console.Write("Please enter the first number: ");
+        num1 = Convert.ToInt32(Console.ReadLine());
+        
+        Console.Write("Please enter the second number: ");
+        num2 = Convert.ToInt32(Console.ReadLine());
+        
+        //Decide which operations is needed based on the selected option
+        int result = 0;
+
+        switch (choice)
+        {
+            case 1: result = num1 + num2; break;
+            case 2: result = num1 - num2; break;
+            case 3: result = num1 * num2; break;
+            case 4: result = num1 / num2; break;
+            case 5:
+                for (int i = num1; i <= num2; i++)
+                {
+                    result += i;
+                }
+                break;
+            default:
+                throw new Exception("Invalid Menu Item Selected.");
+        }
+
+        //Print output
+        Console.WriteLine($"Your result is: {result}");
+    }
+    catch (DivideByZeroException)
+    {
+        Console.WriteLine("Canot divide by zero");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    finally
+    {
+        Console.WriteLine("Press any key to continue.");
+        Console.ReadLine();
+    }
 }
 
 Console.WriteLine("********** - Thank you for using the sample calculator! - **********");
